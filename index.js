@@ -51,3 +51,19 @@ const precioMaquina = (componentes) => {
 
 
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]));
+
+//EJ 2
+/*
+cantidadVentasComponente(componente): recibe el nombre de un componente y devuelve la cantidad de veces que fue vendido. La lista de ventas no se pasa por parámetro, se asume que está identificada por la variable ​ventas​.
+*/
+//Solución Niko
+
+const cantidadVentasComponente = component => {
+    let timesSold = 0;
+    const idxComponent = component => precios.findIndex(element => element[0] === component);
+    ventas.forEach(venta => {
+        idx = idxComponent(component);
+        if(venta[6][idx] === component) timesSold++;
+    });
+    return timesSold;
+}
