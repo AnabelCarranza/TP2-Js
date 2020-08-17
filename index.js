@@ -64,17 +64,43 @@ const soldComponents = () => {
     return soldComponentsFromList.split(',');
 }
 
-checkComponent = component => {
-    if(typeof component !== string) throw new Error("El dato ingresado no es válido");
-    if (soldComponents.find(component) === -1) throw new Error("Este componente no lo hemos vendido o_o");
+const checkComponent = component => {
+    if(typeof component !== "string") throw new Error("El dato ingresado no es válido");
+    // if (soldComponents().findIndex(soldcomponent => soldcomponent === component) === -1) throw new Error("Este componente no lo hemos vendido o_o");
 }
 
 const cantidadVentasComponente = component => {
-    checkComponent();
-    soldList = soldComponents();
+    checkComponent(component);
+    let soldList = soldComponents();
     let timesSold = 0;
     soldList.forEach(sold => {
         if(sold === component) timesSold++;
     });
     return timesSold;
 }
+
+console.log( cantidadVentasComponente("Monitor ASC 543") ); 
+
+
+// 4. componenteMasVendido(): Devuelve el nombre del componente que más ventas
+// tuvo históricamente. El dato de la cantidad de ventas es el que indica la función
+// cantidadVentasComponente
+// console.log( componenteMasVendido() ); // Monitor GPRS 3000
+
+const componenteMasVendido = () => {
+    const componentes = precios.map(precio => precio[0]);
+    let mayor = 0;
+    let masVendido;
+    componentes.forEach(componente => {
+        const cantidadVentas = cantidadVentasComponente(componente);
+        
+        if(cantidadVentas > mayor) {
+            mayor = cantidadVentas;
+            masVendido = componente;
+        }
+    });
+    return masVendido;
+
+}
+
+console.log( componenteMasVendido() ); // Monitor GPRS 3000
